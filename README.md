@@ -50,3 +50,27 @@ RUN bundle install
 ```
 we can now run ```docker-compose build```
 ```docker-compose up```
+
+# create a controller articles
+```rails generate controller Articles index --skip-routes```
+
+app/controllers/articles_controller.rb
+```
+class ArticlesController < ApplicationController
+  def index
+  end
+end
+```
+
+app/views/articles/index.html.erb
+```
+<h1>Hello, Rails!</h1>
+```
+
+config/routes.rb
+```
+get "/articles", to: "articles#index"
+```
+Test:
+```http://localhost:3000/articles```
+
