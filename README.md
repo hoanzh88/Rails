@@ -311,3 +311,34 @@ Let's create app/views/articles/_form.html.erb
 <% end %>
 
 ```
+
+app/views/articles/show.html.erb
+```
+<li><%= link_to "Edit", edit_article_path(@article) %></li>
+```
+
+### Deleting an Article
+app/controllers/articles_controller.rb
+```
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+
+    redirect_to root_path, status: :see_other
+  end
+```
+
+app/views/articles/show.html.erb
+```
+<h1><%= @article.title %></h1>
+
+<p><%= @article.body %></p>
+
+<ul>
+  <li><%= link_to "Edit", edit_article_path(@article) %></li>
+  <li><%= link_to "Destroy", article_path(@article), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li>
+</ul>
+```
