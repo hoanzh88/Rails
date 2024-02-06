@@ -74,3 +74,13 @@ get "/articles", to: "articles#index"
 Test:
 ```http://localhost:3000/articles```
 
+# MVC (Model-View-Controller) 
+
+## Generating a Model
+```rails generate model Article title:string body:text```
+
+## Database Migrations
+```rails db:migrate```
+
+## Showing a List of Articles
+
