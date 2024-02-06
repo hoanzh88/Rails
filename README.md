@@ -249,3 +249,65 @@ app/views/articles/new.html.erb
 ```
 
 Test: ```http://localhost:3000/articles/new```
+
+### Updating an Article
+handled by a controller's edit and update actions.
+app/controllers/articles_controller.rb
+```
+ def edit
+    @article = Article.find(params[:id])
+  end
+
+  def update
+    @article = Article.find(params[:id])
+
+    if @article.update(article_params)
+      redirect_to @article
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+```
+
+let's create a very similar app/views/articles/edit.html.erb
+```
+<h1>Edit Article</h1>
+
+<%= render "form", article: @article %>
+
+```
+
+Let's update app/views/articles/new.html.erb
+```
+<h1>New Article</h1>
+
+<%= render "form", article: @article %>
+
+```
+
+called a partial.
+Let's create app/views/articles/_form.html.erb
+```
+<%= form_with model: article do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+    <% article.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %><br>
+    <% article.errors.full_messages_for(:body).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+```
