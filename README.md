@@ -533,5 +533,11 @@ app/views/articles/show.html.erb
 
 <h2>Add a comment:</h2>
 <%= render 'comments/form' %>
+```
 
+# Security
+Basic Authentication
+app/controllers/articles_controller.rb
+```
+http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
 ```
