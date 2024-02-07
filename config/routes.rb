@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   # get "/articles", to: "articles#index"
   # get "/articles/:id", to: "articles#show"
   root "articles#index"
-  resources :articles
+  # resources :articles
+  resources :articles do
+    resources :comments
+  end
   # Defines the root path route ("/")
   # root "posts#index"
 end
